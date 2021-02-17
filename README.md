@@ -5,13 +5,13 @@
 Register
 
 ```csharp
-	public class Startup()
-	{
-		public void ConfigureContainer(ContainerBuilder builder)
-		{
-			builder.RegisterMatchingEngineGrpcClient(cashServiceGrpcUrl, tradingServiceGrpcUrl, balancesServiceGrpcUrl);
-		}
-	}
+public class Startup()
+{
+  public void ConfigureContainer(ContainerBuilder builder)
+  {
+    builder.RegisterMatchingEngineGrpcClient(cashServiceGrpcUrl, tradingServiceGrpcUrl, balancesServiceGrpcUrl);
+  }
+}
 ```
 
 Interfaces:
