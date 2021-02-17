@@ -19,14 +19,23 @@ namespace MyJetWallet.MatchingEngine.Grpc
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
-            var channelCashService = GrpcChannel.ForAddress(cashServiceGrpcUrl);
-            _invokerCashService = channelCashService.Intercept(new PrometheusMetricsInterceptor());
+            if (!string.IsNullOrEmpty(cashServiceGrpcUrl))
+            {
+                var channelCashService = GrpcChannel.ForAddress(cashServiceGrpcUrl);
+                _invokerCashService = channelCashService.Intercept(new PrometheusMetricsInterceptor());
+            }
 
-            var channelTradingService = GrpcChannel.ForAddress(tradingServiceGrpcUrl);
-            _invokerTradingService = channelTradingService.Intercept(new PrometheusMetricsInterceptor());
+            if (!string.IsNullOrEmpty(tradingServiceGrpcUrl))
+            {
+                var channelTradingService = GrpcChannel.ForAddress(tradingServiceGrpcUrl);
+                _invokerTradingService = channelTradingService.Intercept(new PrometheusMetricsInterceptor());
+            }
 
-            var channelBalancesService = GrpcChannel.ForAddress(balancesServiceGrpcUrl);
-            _invokerBalancesService = channelBalancesService.Intercept(new PrometheusMetricsInterceptor());
+            if (!string.IsNullOrEmpty(balancesServiceGrpcUrl))
+            {
+                var channelBalancesService = GrpcChannel.ForAddress(balancesServiceGrpcUrl);
+                _invokerBalancesService = channelBalancesService.Intercept(new PrometheusMetricsInterceptor());
+            }
         }
 
         public ICashServiceClient GetCashService()
