@@ -5,12 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="OrderBooksMessages.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="6.1.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.35.0" />
     <PackageReference Include="MyJetWallet.Sdk.GrpcMetrics" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="OrderBooksMessages.proto" GrpcServices="Client" />
     <Protobuf Include="BalancesMessages.proto" GrpcServices="Client" />
     <Protobuf Include="GrpcIncomingApi.proto" GrpcServices="Client" />
     <Protobuf Include="GrpcIncomingMessages.proto" GrpcServices="Client" />

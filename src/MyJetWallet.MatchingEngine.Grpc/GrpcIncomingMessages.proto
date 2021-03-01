@@ -104,7 +104,7 @@ message LimitOrder {
 
 message LimitOrderResponse {
   string id = 1;
-  uint64 walletVersion = 2;
+  int64 walletVersion = 2;
   Status status = 3;
   google.protobuf.StringValue statusReason = 4;
   google.protobuf.StringValue matchingEngineId = 5;
@@ -128,7 +128,7 @@ message MarketOrder {
 
 message MarketOrderResponse {
   string id = 1;
-  uint64 walletVersion = 2;
+  int64 walletVersion = 2;
   Status status = 3;
   google.protobuf.StringValue statusReason = 4;
   google.protobuf.StringValue price = 5;
@@ -172,7 +172,7 @@ message MultiLimitOrder {
 
 message MultiLimitOrderResponse {
   string id = 1;
-  uint64 walletVersion = 2;
+  int64 walletVersion = 2;
   Status status = 3;
   google.protobuf.StringValue statusReason = 4;
   google.protobuf.StringValue assetPairId = 5;
@@ -201,7 +201,7 @@ message LimitOrderCancel {
 
 message LimitOrderCancelResponse {
   string id = 1;
-  uint64 walletVersion = 2;
+  int64 walletVersion = 2;
   Status status = 3;
   google.protobuf.StringValue statusReason = 4;
   google.protobuf.StringValue matchingEngineId = 5;
