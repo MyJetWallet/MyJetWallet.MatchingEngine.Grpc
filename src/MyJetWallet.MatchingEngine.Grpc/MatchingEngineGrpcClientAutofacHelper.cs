@@ -31,6 +31,9 @@ namespace MyJetWallet.MatchingEngine.Grpc
 
             if (!string.IsNullOrEmpty(balancesServiceGrpcUrl))
                 builder.RegisterInstance(factory.GetBalancesService()).As<IBalancesServiceClient>().SingleInstance();
+
+            if (!string.IsNullOrEmpty(orderBookServiceGrpcUrl))
+                builder.RegisterInstance(factory.GetOrderBookService()).As<IOrderBookServiceClient>().SingleInstance();
         }
 
 
