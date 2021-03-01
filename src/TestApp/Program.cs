@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using ME.Contracts.Api.BalancesMessages;
 using ME.Contracts.Api.IncomingMessages;
 using MyJetWallet.MatchingEngine.Grpc;
@@ -13,7 +15,10 @@ namespace TestApp
             var factory = new MatchingEngineClientFactory(
                 "http://192.168.10.80:5001",
                 "http://192.168.10.80:5002",
-                "http://192.168.10.80:5003");
+                "http://192.168.10.80:5003",
+                "http://192.168.10.80:5004");
+
+            var orderBookClient = factory.GetOrderBookService();
 
             var cashClient = factory.GetCashService();
 
@@ -46,8 +51,8 @@ namespace TestApp
                 WalletId = "manual-test-w-003",
                 BrokerId = "jetwallet",
 
-                AssetPairId = "BTCUSD",
-                Price = "80000",
+                AssetPairId = "BTCEUR",
+                Price = "90000",
                 Volume = "-0.001",
                 Type = LimitOrder.Types.LimitOrderType.Limit,
                 WalletVersion = -1
@@ -57,6 +62,17 @@ namespace TestApp
             Console.WriteLine();
             Console.WriteLine("LIMIT ORDER");
             Console.WriteLine(JsonConvert.SerializeObject(limitOrderResp, Formatting.Indented));
+
+
+            var orderBookSnapshots = orderBookClient.OrderBookSnapshots().ToList();
+            foreach (var snapshot in orderBookSnapshots)
+            {
+                Console.WriteLine($"{snapshot.Asset} | IsBuy={snapshot.IsBuy}");
+                foreach (var level in snapshot.Levels)
+                {
+                    Console.WriteLine($"    {level.Price} | {level.Volume} | {level.WalletId}");
+                }
+            }
 
             var cancelResp = tradingClient.CancelLimitOrder(new LimitOrderCancel()
             {

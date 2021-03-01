@@ -17,9 +17,9 @@ namespace MyJetWallet.MatchingEngine.Grpc
         /// if url is empty then registration is skipped
         /// </summary>
         public static void RegisterMatchingEngineGrpcClient(this ContainerBuilder builder, string cashServiceGrpcUrl = default,
-            string tradingServiceGrpcUrl=default, string balancesServiceGrpcUrl=default)
+            string tradingServiceGrpcUrl=default, string balancesServiceGrpcUrl=default, string orderBookServiceGrpcUrl = default)
         {
-            var factory = new MatchingEngineClientFactory(cashServiceGrpcUrl, tradingServiceGrpcUrl, balancesServiceGrpcUrl);
+            var factory = new MatchingEngineClientFactory(cashServiceGrpcUrl, tradingServiceGrpcUrl, balancesServiceGrpcUrl, orderBookServiceGrpcUrl);
 
             builder.RegisterInstance(factory).AsSelf().SingleInstance();
 

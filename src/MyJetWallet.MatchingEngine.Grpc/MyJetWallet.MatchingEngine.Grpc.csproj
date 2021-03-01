@@ -12,6 +12,7 @@
     <PackageReference Include="Autofac" Version="6.1.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.35.0" />
     <PackageReference Include="MyJetWallet.Sdk.GrpcMetrics" Version="1.0.0" />
+    <PackageReference Include="System.Linq.Async" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

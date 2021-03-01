@@ -14,8 +14,9 @@ namespace MyJetWallet.MatchingEngine.Grpc
         private readonly CallInvoker _invokerCashService;
         private readonly CallInvoker _invokerTradingService;
         private readonly CallInvoker _invokerBalancesService;
+        private readonly CallInvoker _invokerOrderBookService;
 
-        public MatchingEngineClientFactory(string cashServiceGrpcUrl, string tradingServiceGrpcUrl, string balancesServiceGrpcUrl)
+        public MatchingEngineClientFactory(string cashServiceGrpcUrl, string tradingServiceGrpcUrl, string balancesServiceGrpcUrl, string orderBookServiceGrpcUrl)
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
@@ -36,6 +37,12 @@ namespace MyJetWallet.MatchingEngine.Grpc
                 var channelBalancesService = GrpcChannel.ForAddress(balancesServiceGrpcUrl);
                 _invokerBalancesService = channelBalancesService.Intercept(new PrometheusMetricsInterceptor());
             }
+
+            if (!string.IsNullOrEmpty(orderBookServiceGrpcUrl))
+            {
+                var channelOrderBookService = GrpcChannel.ForAddress(orderBookServiceGrpcUrl);
+                _invokerOrderBookService = channelOrderBookService.Intercept(new PrometheusMetricsInterceptor());
+            }
         }
 
         public ICashServiceClient GetCashService()
@@ -52,5 +59,15 @@ namespace MyJetWallet.MatchingEngine.Grpc
         {
             return new BalancesService.BalancesServiceClient(_invokerBalancesService);
         }
+
+        public IOrderBookServiceClient GetOrderBookService()
+        {
+            return new OrderBooksService.OrderBooksServiceClient(_invokerOrderBookService);
+        }
+
+
+
+        
+
     }
 }
