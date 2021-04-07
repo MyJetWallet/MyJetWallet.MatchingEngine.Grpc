@@ -30,6 +30,16 @@ namespace ME.Contracts.Api
                 return await CashTransferAsync(request, cancellationToken: cancellationToken);
             }
 
+            CashSwapOperationResponse ICashServiceClient.CashSwap(CashSwapOperation request, CancellationToken cancellationToken)
+            {
+                return CashSwap(request, cancellationToken: cancellationToken);
+            }
+
+            async Task<CashSwapOperationResponse> ICashServiceClient.CashSwapAsync(CashSwapOperation request, CancellationToken cancellationToken)
+            {
+                return await CashSwapAsync(request, cancellationToken: cancellationToken);
+            }
+
             ReservedCashInOutOperationResponse ICashServiceClient.ReservedCashInOut(ReservedCashInOutOperation request, CancellationToken cancellationToken)
             {
                 return ReservedCashInOut(request, cancellationToken: cancellationToken);

@@ -14,6 +14,10 @@ namespace MyJetWallet.MatchingEngine.Grpc.Api
         
         Task<CashTransferOperationResponse> CashTransferAsync(CashTransferOperation request, CancellationToken cancellationToken = default);
         
+        CashSwapOperationResponse CashSwap(CashSwapOperation request, CancellationToken cancellationToken = default);
+        
+        Task<CashSwapOperationResponse> CashSwapAsync(CashSwapOperation request, CancellationToken cancellationToken = default);
+        
         ReservedCashInOutOperationResponse ReservedCashInOut(ReservedCashInOutOperation request, CancellationToken cancellationToken = default);
 
         Task<ReservedCashInOutOperationResponse> ReservedCashInOutAsync(ReservedCashInOutOperation request, CancellationToken cancellationToken = default);
